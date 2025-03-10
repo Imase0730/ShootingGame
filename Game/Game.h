@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "BulletManager.h"
 
+#include "Enemy.h"
+
 // ゲーム
 class Game
 {
@@ -44,6 +46,9 @@ private:
 
 	// プレイヤーの弾のマネージャー
 	BulletManager m_playerBulletManager;
+
+	// 敵
+	Enemy m_enemy;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:
