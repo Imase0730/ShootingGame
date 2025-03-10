@@ -4,9 +4,8 @@
 //--------------------------------------------------------------------------------------
 #pragma once
 
-#include "Player.h"
-#include "BulletManager.h"
-#include "EnemyManager.h"
+#include "TitleScene/TitleScene.h"
+#include "GameplayScene/GameplayScene.h"
 
 // ゲーム
 class Game
@@ -14,6 +13,14 @@ class Game
 	// 列挙型の定義 -----------------------------------------------------
 public:
 
+	// シーンID
+	enum class SceneID
+	{
+		NONE = -1,
+		TITLE,
+		GAMEPLAY,
+		RESULT
+	};
 
 	// クラス定数の宣言 -------------------------------------------------
 public:
@@ -21,17 +28,6 @@ public:
 	// ゲームタイトル
 	static constexpr const wchar_t* TITLE = L"Sample Game";
 
-	// プレイヤーのY座標
-	static constexpr int PLAYER_POSITION_Y = 600;
-
-	// 敵の最大数
-	static constexpr int ENEMY_MAX = 10;
-
-	// プレイヤーの弾の最大数
-	static constexpr int PLAYER_BULLET_MAX = 3;
-
-	// 敵の弾の最大数
-	static constexpr int ENEMY_BULLET_MAX = 100;
 
 	// データメンバの宣言 -----------------------------------------------
 private:
@@ -43,20 +39,12 @@ private:
 	int m_key;
 	int m_oldKey;
 
-	// テクスチャハンドル
-	int m_texture;
+	SceneID m_currentSceneID;	// 現在のシーンID
+	SceneID m_requestedSceneID;	// 変更要求のシーンID
 
-	// プレイヤー
-	Player m_player;
-
-	// 敵のマネージャー
-	EnemyManager m_enemyManager;
-
-	// プレイヤーの弾のマネージャー
-	BulletManager m_playerBulletManager;
-
-	// 敵の弾のマネージャー
-	BulletManager m_enemyBulletManager;
+	// シーンオブジェクト
+	GameplayScene m_gameplayScene;	// ゲームプレイシーン
+	TitleScene m_titleScene;		// タイトルシーン
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:
@@ -79,7 +67,27 @@ public:
 	// 終了処理
 	void Finalize();
 
-	// AABBの衝突判定関数
-	bool IsHit(RECT a, RECT b);
+	// シーン変更の要求
+	void RequestSceneChange(SceneID nextSceneID);
+
+private:
+
+	// 開始シーンの設定
+	void SetStartScene(SceneID startSceneID);
+
+	// シーンの変更
+	void ChangeScene();
+
+	// 現在のシーンの初期化処理
+	void InitializeCurrentScene();
+
+	// 現在のシーンの更新処理
+	void UpdateCurrentScene(int keyCondition, int keyTrigger);
+
+	// 現在のシーンの描画処理
+	void RenderCurrentScene();
+
+	// 現在のシーンの終了処理
+	void FinalizeCurrentScene();
 
 };

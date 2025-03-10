@@ -139,19 +139,23 @@
   <!-- ファイル -->
   <ItemGroup>
     <!-- プリコンパイル済みヘッダー -->
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="BulletManager.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="GameplayScene\Bullet.cpp" />
+    <ClCompile Include="GameplayScene\BulletManager.cpp" />
+    <ClCompile Include="GameplayScene\Enemy.cpp" />
+    <ClCompile Include="GameplayScene\EnemyManager.cpp" />
+    <ClCompile Include="GameplayScene\GameplayScene.cpp" />
+    <ClCompile Include="GameplayScene\Player.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletManager.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="GameplayScene\Bullet.h" />
+    <ClInclude Include="GameplayScene\BulletManager.h" />
+    <ClInclude Include="GameplayScene\Enemy.h" />
+    <ClInclude Include="GameplayScene\EnemyManager.h" />
+    <ClInclude Include="GameplayScene\GameplayScene.h" />
+    <ClInclude Include="GameplayScene\Player.h" />
     <ClInclude Include="pch.h" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TitleScene\TitleScene.cpp" />
     <!-- メイン -->
     <ClCompile Include="WinMain.cpp" />
     <!-- ゲーム -->
@@ -165,7 +169,7 @@
     <ClInclude Include="Library\MemoryLeakDetector.h" />
     <!-- 埋め込みリソース -->
     <ClInclude Include="EmbeddedResources\Resource.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="TitleScene\TitleScene.h" />
     <ResourceCompile Include="EmbeddedResources\Resource.rc" />
     <Image Include="EmbeddedResources\Icon\Game.ico" />
     <None Include="packages.config" />

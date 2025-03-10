@@ -27,6 +27,12 @@
     <Filter Include="Resources\Textures">
       <UniqueIdentifier>{48aa4fce-5282-4008-afd6-7bfddd934eb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameplayScene">
+      <UniqueIdentifier>{f3d0bb4b-5ba3-4156-9cb2-8341eb0ca41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TitleScene">
+      <UniqueIdentifier>{bf0f87bb-5817-497f-a3ff-d63a8e3a95db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <!-- ファイル -->
   <ItemGroup>
@@ -75,40 +81,52 @@
     <Image Include="Resources\Textures\TridentLogo.png">
       <Filter>Resources\Textures</Filter>
     </Image>
-    <ClCompile Include="Player.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="GameplayScene\Bullet.cpp">
+      <Filter>GameplayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="GameplayScene\BulletManager.cpp">
+      <Filter>GameplayScene</Filter>
     </ClCompile>
-    <ClCompile Include="BulletManager.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="GameplayScene\Enemy.cpp">
+      <Filter>GameplayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="GameplayScene\EnemyManager.cpp">
+      <Filter>GameplayScene</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="GameplayScene\Player.cpp">
+      <Filter>GameplayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameplayScene\GameplayScene.cpp">
+      <Filter>GameplayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene\TitleScene.cpp">
+      <Filter>TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="GameplayScene\Bullet.h">
+      <Filter>GameplayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="GameplayScene\BulletManager.h">
+      <Filter>GameplayScene</Filter>
     </ClInclude>
-    <ClInclude Include="BulletManager.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="GameplayScene\Enemy.h">
+      <Filter>GameplayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="GameplayScene\EnemyManager.h">
+      <Filter>GameplayScene</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="GameplayScene\Player.h">
+      <Filter>GameplayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameplayScene\GameplayScene.h">
+      <Filter>GameplayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene\TitleScene.h">
+      <Filter>TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
