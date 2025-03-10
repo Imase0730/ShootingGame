@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Player.h"
-#include "Bullet.h"
+#include "BulletManager.h"
 
 // ゲーム
 class Game
@@ -23,8 +23,8 @@ public:
 	// プレイヤーのY座標
 	static constexpr int PLAYER_POSITION_Y = 600;
 
-	// 弾の最大数
-	static constexpr int BULLET_MAX = 3;
+	// プレイヤーの弾の最大数
+	static constexpr int PLAYER_BULLET_MAX = 3;
 
 	// データメンバの宣言 -----------------------------------------------
 private:
@@ -42,8 +42,8 @@ private:
 	// プレイヤー
 	Player m_player;
 
-	// 弾
-	Bullet m_bullet[BULLET_MAX];
+	// プレイヤーの弾のマネージャー
+	BulletManager m_playerBulletManager;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:

@@ -4,6 +4,8 @@
 //--------------------------------------------------------------------------------------
 #pragma once
 
+#include "BulletManager.h"
+
 // プレイヤー
 class Player
 {
@@ -41,7 +43,7 @@ public:
 	void Initialize(int texture, POINT position);
 
 	// 更新関数
-	void Update(int keyCondition, int keyTrigger);
+	void Update(int keyCondition, int keyTrigger, BulletManager* pBulletManager);
 
 	// 描画関数
 	void Render();

@@ -12,6 +12,7 @@ Game::Game()
 	, m_oldKey{}
 	, m_texture{}
 	, m_player{}
+	, m_playerBulletManager{}
 {
 	// 乱数の初期値を設定
 	SRand(static_cast<int>(time(NULL)));
@@ -32,11 +33,8 @@ void Game::Initialize()
 	POINT position = { (Screen::WIDTH - Player::SIZE) / 2, PLAYER_POSITION_Y };
 	m_player.Initialize(m_texture, position);
 
-	// 弾の初期化
-	for (int i = 0; i < BULLET_MAX; i++)
-	{
-		m_bullet[i].Initialize(m_texture);
-	}
+	// プレイヤーの弾のマネージャーの初期化
+	m_playerBulletManager.Initialize(PLAYER_BULLET_MAX, m_texture);
 }
 
 // 更新処理
@@ -50,25 +48,10 @@ void Game::Update()
 	m_key = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	// プレイヤーの更新
-	m_player.Update(m_key, m_oldKey);
+	m_player.Update(m_key, ~m_oldKey & m_key, &m_playerBulletManager);
 
-	// スペースキーで弾を発射
-	if ((~m_oldKey & m_key) & PAD_INPUT_10)
-	{
-		for (int i = 0; i < BULLET_MAX; i++)
-		{
-			if (!m_bullet[i].IsActive())
-			{
-				m_bullet[i].Shot(m_player.GetPosition());
-			}
-		}
-	}
-
-	// 弾の更新
-	for (int i = 0; i < BULLET_MAX; i++)
-	{
-		m_bullet[i].Update();
-	}
+	// プレイヤーの弾のマネージャーの更新
+	m_playerBulletManager.Update();
 }
 
 // 描画処理
@@ -77,11 +60,8 @@ void Game::Render()
 	// プレイヤーの描画
 	m_player.Render();
 
-	// 弾の描画
-	for (int i = 0; i < BULLET_MAX; i++)
-	{
-		m_bullet[i].Render();
-	}
+	// プレイヤーの弾の描画
+	m_playerBulletManager.Render();
 
 	// FPSの描画
 	DrawFormatString(10, 10, GetColor(255, 255, 255), L"%3.0ffps", m_frameTimer.GetFrameRate());

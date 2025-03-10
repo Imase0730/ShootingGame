@@ -30,7 +30,7 @@ void Player::Initialize(int texture, POINT position)
 }
 
 // 更新関数
-void Player::Update(int keyCondition, int keyTrigger)
+void Player::Update(int keyCondition, int keyTrigger, BulletManager* pBulletManager)
 {
 	// 左右キーでプレイヤーを移動
 	m_velocity = POINT{ 0, 0 };
@@ -55,6 +55,15 @@ void Player::Update(int keyCondition, int keyTrigger)
 	if (m_position.x > Screen::WIDTH - Player::SIZE)
 	{
 		m_position.x = Screen::WIDTH - Player::SIZE;
+	}
+
+	// スペースキーで弾を発射
+	if (keyTrigger & PAD_INPUT_10)
+	{
+		// 弾をプレイヤーの中央から発射する
+		POINT position = m_position;
+		position.x += (Player::SIZE - Bullet::SIZE) / 2;
+		pBulletManager->Shot(position);
 	}
 }
 
