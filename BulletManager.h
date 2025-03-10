@@ -28,7 +28,7 @@ public:
 	~BulletManager();
 
 	// ‰Šú‰»ŠÖ”
-	void Initialize(int bulletCount, int texture);
+	void Initialize(int bulletCount, int texture, Bullet::Type type);
 
 	// XVŠÖ”
 	void Update();

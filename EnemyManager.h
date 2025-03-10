@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Enemy.h"
+#include "BulletManager.h"
 
 // 敵のマネージャー
 class EnemyManager
@@ -40,7 +41,7 @@ public:
 	void Initialize(int enemyCount, int texture);
 
 	// 更新関数
-	void Update();
+	void Update(BulletManager* pBulletManager);
 
 	// 描画関数
 	void Render();

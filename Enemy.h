@@ -4,6 +4,8 @@
 //--------------------------------------------------------------------------------------
 #pragma once
 
+#include "BulletManager.h"
+
 // 敵
 class Enemy
 {
@@ -15,6 +17,9 @@ public:
 
 	// 移動の速さ
 	static constexpr int SPEED = 5;
+
+	// 弾の発射間隔
+	static constexpr int SHOT_INTERVAL = 60;
 
 	// データメンバの宣言 -----------------------------------------------
 private:
@@ -31,6 +36,9 @@ private:
 	// 速度
 	POINT m_velocity;
 
+	// フレーム数
+	int m_frameCount;
+
 	// メンバ関数の宣言 -------------------------------------------------
 public:
 
@@ -44,7 +52,7 @@ public:
 	void Initialize(int texture);
 
 	// 更新関数
-	void Update();
+	void Update(BulletManager* pBulletMagager);
 
 	// 描画関数
 	void Render();

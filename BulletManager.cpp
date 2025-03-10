@@ -20,7 +20,7 @@ BulletManager::~BulletManager()
 }
 
 // ‰Šú‰»ŠÖ”
-void BulletManager::Initialize(int bulletCount, int texture)
+void BulletManager::Initialize(int bulletCount, int texture, Bullet::Type type)
 {
 	// ŠÇ—‚·‚é’e‚Ì”
 	m_bulletCount = bulletCount;
@@ -33,7 +33,7 @@ void BulletManager::Initialize(int bulletCount, int texture)
 	for (int i = 0; i < bulletCount; i++)
 	{
 		// ’e‚ğ‰Šú‰»
-		m_pBullet[i].Initialize(texture);
+		m_pBullet[i].Initialize(texture, type);
 	}
 }
 
@@ -42,10 +42,7 @@ void BulletManager::Update()
 {
 	for (int i = 0; i < m_bulletCount; i++)
 	{
-		if (m_pBullet[i].IsActive())
-		{
-			m_pBullet[i].Update();
-		}
+		m_pBullet[i].Update();
 	}
 }
 
@@ -54,10 +51,7 @@ void BulletManager::Render()
 {
 	for (int i = 0; i < m_bulletCount; i++)
 	{
-		if (m_pBullet[i].IsActive())
-		{
-			m_pBullet[i].Render();
-		}
+		m_pBullet[i].Render();
 	}
 }
 

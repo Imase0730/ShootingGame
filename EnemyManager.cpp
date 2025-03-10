@@ -40,14 +40,11 @@ void EnemyManager::Initialize(int enemyCount, int texture)
 }
 
 // 更新関数
-void EnemyManager::Update()
+void EnemyManager::Update(BulletManager* pBulletManager)
 {
 	for (int i = 0; i < m_enemyCount; i++)
 	{
-		if (m_pEnemy[i].IsActive())
-		{
-			m_pEnemy[i].Update();
-		}
+		m_pEnemy[i].Update(pBulletManager);
 	}
 
 	// 敵の出現用カウンターの加算
@@ -68,10 +65,7 @@ void EnemyManager::Render()
 {
 	for (int i = 0; i < m_enemyCount; i++)
 	{
-		if (m_pEnemy[i].IsActive())
-		{
-			m_pEnemy[i].Render();
-		}
+		m_pEnemy[i].Render();
 	}
 }
 

@@ -30,6 +30,9 @@ public:
 	// プレイヤーの弾の最大数
 	static constexpr int PLAYER_BULLET_MAX = 3;
 
+	// 敵の弾の最大数
+	static constexpr int ENEMY_BULLET_MAX = 100;
+
 	// データメンバの宣言 -----------------------------------------------
 private:
 
@@ -51,6 +54,9 @@ private:
 
 	// プレイヤーの弾のマネージャー
 	BulletManager m_playerBulletManager;
+
+	// 敵の弾のマネージャー
+	BulletManager m_enemyBulletManager;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:

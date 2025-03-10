@@ -12,6 +12,7 @@ Bullet::Bullet()
 	, m_texture{}
 	, m_position{}
 	, m_velocity{}
+	, m_type{ Type::None }
 {
 }
 
@@ -21,18 +22,24 @@ Bullet::~Bullet()
 }
 
 // 初期化関数
-void Bullet::Initialize(int texture)
+void Bullet::Initialize(int texture, Bullet::Type type)
 {
 	// テクスチャハンドル
 	m_texture = texture;
 
 	// 速度
-	m_velocity = Bullet::SPEED;
+	m_velocity = Bullet::SPEED[static_cast<int>(type)];
+
+	// タイプ
+	m_type = type;
 }
 
 // 更新関数
 void Bullet::Update()
 {
+	// アクティブでないなら更新しない
+	if (!IsActive()) return;
+
 	// 位置に速度を足す
 	m_position.x += m_velocity.x;
 	m_position.y += m_velocity.y;
@@ -50,12 +57,21 @@ void Bullet::Update()
 // 描画関数
 void Bullet::Render()
 {
-	if (m_isActive)
+	// アクティブでないなら更新しない
+	if (!IsActive()) return;
+
+	if (m_type == Type::Player)
 	{
 		// 黄色の弾
 		DrawRectExtendGraph( m_position.x, m_position.y
 						   , m_position.x + Bullet::SIZE, m_position.y + Bullet::SIZE
 						   , 64, 32, 16, 16, m_texture, TRUE );
+	}
+	else if (m_type == Type::Enemy) {
+		// 赤紫の弾
+		DrawRectExtendGraph( m_position.x, m_position.y
+						   , m_position.x + Bullet::SIZE, m_position.y + Bullet::SIZE
+						   , 64 + 16, 32, 16, 16, m_texture, TRUE );
 	}
 }
 

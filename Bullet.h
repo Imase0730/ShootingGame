@@ -10,11 +10,17 @@ class Bullet
 	// クラス定数の宣言 -------------------------------------------------
 public:
 
+	// 弾のタイプ
+	enum class Type { None, Player, Enemy, TypeNum };
+
 	// 弾の大きさ
 	static constexpr int SIZE = 16;
 
 	// 各タイプ毎の弾の速さ
-	static constexpr POINT SPEED = { 0, -10 };
+	static constexpr POINT SPEED[static_cast<int>(Type::TypeNum)] =
+	{
+		{ 0, 0 }, { 0, -10 }, { 0, 10 }
+	};
 
 	// データメンバの宣言 -----------------------------------------------
 private:
@@ -31,6 +37,9 @@ private:
 	// 速度
 	POINT m_velocity;
 
+	// タイプ
+	Type m_type;
+
 	// メンバ関数の宣言 -------------------------------------------------
 public:
 
@@ -41,7 +50,7 @@ public:
 	~Bullet();
 
 	// 初期化関数
-	void Initialize(int texture);
+	void Initialize(int texture, Bullet::Type type);
 
 	// 更新関数
 	void Update();

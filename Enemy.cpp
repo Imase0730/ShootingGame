@@ -12,6 +12,7 @@ Enemy::Enemy()
 	, m_texture{}
 	, m_position{}
 	, m_velocity{}
+	, m_frameCount{}
 {
 }
 
@@ -32,11 +33,27 @@ void Enemy::Initialize(int texture)
 }
 
 // 更新関数
-void Enemy::Update()
+void Enemy::Update(BulletManager* pBulletManager)
 {
+	// アクティブでないなら更新しない
+	if (!IsActive()) return;
+
+	// フレーム数を加算
+	m_frameCount++;
+
 	// 位置に速度を足す
 	m_position.x += m_velocity.x;
 	m_position.y += m_velocity.y;
+
+	// 一定間隔で弾を発射
+	if (m_frameCount % SHOT_INTERVAL == 0)
+	{
+		// 弾を敵の中央から発射する
+		POINT position = m_position;
+		position.x += (Enemy::SIZE - Bullet::SIZE) / 2;
+		position.y += Enemy::SIZE - Bullet::SIZE;
+		pBulletManager->Shot(position);
+	}
 
 	// 画面外なら
 	if ( (m_position.x < -Enemy::SIZE) || (m_position.x > Screen::WIDTH)

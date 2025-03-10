@@ -14,6 +14,7 @@ Game::Game()
 	, m_player{}
 	, m_enemyManager{}
 	, m_playerBulletManager{}
+	, m_enemyBulletManager{}
 {
 	// 乱数の初期値を設定
 	SRand(static_cast<int>(time(NULL)));
@@ -38,7 +39,10 @@ void Game::Initialize()
 	m_enemyManager.Initialize(ENEMY_MAX, m_texture);
 
 	// プレイヤーの弾のマネージャーの初期化
-	m_playerBulletManager.Initialize(PLAYER_BULLET_MAX, m_texture);
+	m_playerBulletManager.Initialize(PLAYER_BULLET_MAX, m_texture, Bullet::Type::Player);
+
+	// 敵の弾のマネージャーの初期化
+	m_enemyBulletManager.Initialize(ENEMY_BULLET_MAX, m_texture, Bullet::Type::Enemy);
 }
 
 // 更新処理
@@ -55,10 +59,13 @@ void Game::Update()
 	m_player.Update(m_key, ~m_oldKey & m_key, &m_playerBulletManager);
 
 	// 敵の更新
-	m_enemyManager.Update();
+	m_enemyManager.Update(&m_enemyBulletManager);
 
 	// プレイヤーの弾の更新
 	m_playerBulletManager.Update();
+
+	// 敵の弾の更新
+	m_enemyBulletManager.Update();
 }
 
 // 描画処理
@@ -67,11 +74,14 @@ void Game::Render()
 	// プレイヤーの描画
 	m_player.Render();
 
+	// 敵の描画
+	m_enemyManager.Render();
+
 	// プレイヤーの弾の描画
 	m_playerBulletManager.Render();
 
-	// 敵の描画
-	m_enemyManager.Render();
+	// 敵の弾の描画
+	m_enemyBulletManager.Render();
 
 	// FPSの描画
 	DrawFormatString(10, 10, GetColor(255, 255, 255), L"%3.0ffps", m_frameTimer.GetFrameRate());
