@@ -64,5 +64,11 @@ public:
 	// データが有効か調べる関数
 	bool IsActive() { return m_isActive; }
 
+	// 衝突判定の矩形取得関数
+	RECT GetCollider();
+
+	// 消滅させる関数
+	void OnHit() { m_isActive = false; }
+
 };
 

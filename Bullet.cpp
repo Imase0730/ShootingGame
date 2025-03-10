@@ -85,3 +85,16 @@ void Bullet::Shot(POINT position)
 	m_position = position;
 }
 
+// Õ“Ë”»’è‚Ì‹éŒ`æ“¾ŠÖ”
+RECT Bullet::GetCollider()
+{
+	RECT rect{};
+
+	rect.left = m_position.x;
+	rect.right = m_position.x + Bullet::SIZE;
+	rect.top = m_position.y;
+	rect.bottom = m_position.y + Bullet::SIZE;
+
+	return rect;
+}
+

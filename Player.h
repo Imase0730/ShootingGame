@@ -21,6 +21,9 @@ public:
 	// データメンバの宣言 -----------------------------------------------
 private:
 
+	// アクティブならtrueを設定
+	bool m_isActive;
+
 	// テクスチャハンドル
 	int m_texture;
 
@@ -48,8 +51,14 @@ public:
 	// 描画関数
 	void Render();
 
-	// 位置の取得関数
-	POINT GetPosition() { return m_position; }
+	// 衝突判定の取得関数
+	RECT GetCollider();
+
+	// データが有効か調べる関数
+	bool IsActive() { return m_isActive; }
+
+	// 消滅させる関数
+	void OnHit() { m_isActive = false; }
 
 };
 

@@ -70,3 +70,9 @@ void BulletManager::Shot(POINT position)
 	}
 }
 
+// ƒvƒŒƒCƒ„[‚Ì’e‚ğæ“¾‚·‚éŠÖ”
+Bullet* BulletManager::GetBullet(int idx)
+{
+	if (idx < 0 || idx >= m_bulletCount || !m_pBullet[idx].IsActive()) return nullptr;
+	return &m_pBullet[idx];
+}

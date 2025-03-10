@@ -79,4 +79,7 @@ public:
 	// 終了処理
 	void Finalize();
 
+	// AABBの衝突判定関数
+	bool IsHit(RECT a, RECT b);
+
 };

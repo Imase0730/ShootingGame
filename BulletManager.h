@@ -42,5 +42,8 @@ public:
 	// ’e‚ğ”­Ë‚·‚éŠÖ”
 	void Shot(POINT position);
 
+	// ’e‚ğæ“¾‚·‚éŠÖ”
+	Bullet* GetBullet(int idx);
+
 };
 

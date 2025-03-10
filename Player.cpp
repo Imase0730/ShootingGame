@@ -8,7 +8,8 @@
 
 // コンストラクタ
 Player::Player()
-	: m_texture{}
+	: m_isActive{ false }
+	, m_texture{}
 	, m_position{}
 	, m_velocity{}
 {
@@ -22,6 +23,9 @@ Player::~Player()
 // 初期化関数
 void Player::Initialize(int texture, POINT position)
 {
+	// アクティブ
+	m_isActive = true;
+
 	// テクスチャハンドル
 	m_texture = texture;
 
@@ -32,6 +36,9 @@ void Player::Initialize(int texture, POINT position)
 // 更新関数
 void Player::Update(int keyCondition, int keyTrigger, BulletManager* pBulletManager)
 {
+	// アクティブでないなら何もしない
+	if (!IsActive()) return;
+
 	// 左右キーでプレイヤーを移動
 	m_velocity = POINT{ 0, 0 };
 	if (keyCondition & PAD_INPUT_RIGHT)
@@ -70,9 +77,24 @@ void Player::Update(int keyCondition, int keyTrigger, BulletManager* pBulletMana
 // 描画関数
 void Player::Render()
 {
+	// アクティブでないなら何もしない
+	if (!IsActive()) return;
+
 	// プレイヤーの描画
 	DrawRectExtendGraph( m_position.x, m_position.y
 					   , m_position.x + Player::SIZE, m_position.y + Player::SIZE
 					   , 0, 0, 32, 32, m_texture, TRUE);
 }
 
+// 衝突判定の取得関数
+RECT Player::GetCollider()
+{
+	RECT rect{};
+
+	rect.left = m_position.x;
+	rect.right = m_position.x + Player::SIZE;
+	rect.top = m_position.y;
+	rect.bottom = m_position.y + Player::SIZE;
+
+	return rect;
+}

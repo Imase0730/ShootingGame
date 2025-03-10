@@ -84,3 +84,10 @@ void EnemyManager::AppearEnemy(POINT position)
 	}
 }
 
+// “G‚ğæ“¾‚·‚éŠÖ”
+Enemy* EnemyManager::GetEnemy(int idx)
+{
+	if (idx < 0 || idx >= m_enemyCount || !m_pEnemy[idx].IsActive()) return nullptr;
+	return &m_pEnemy[idx];
+}
+

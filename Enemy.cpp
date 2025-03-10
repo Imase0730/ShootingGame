@@ -86,3 +86,15 @@ void Enemy::Appear(POINT position)
 	m_position = position;
 }
 
+// Õ“Ë”»’è‚Ìæ“¾ŠÖ”
+RECT Enemy::GetCollider()
+{
+	RECT rect{};
+
+	rect.left = m_position.x;
+	rect.right = m_position.x + Enemy::SIZE;
+	rect.top = m_position.y;
+	rect.bottom = m_position.y + Enemy::SIZE;
+
+	return rect;
+}

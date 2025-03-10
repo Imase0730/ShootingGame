@@ -66,6 +66,52 @@ void Game::Update()
 
 	// 敵の弾の更新
 	m_enemyBulletManager.Update();
+
+	// プレイヤーの弾と敵の衝突判定
+	for (int j = 0; j < m_playerBulletManager.GetBulletCount(); j++)
+	{
+		// プレイヤーの弾が有効なら
+		Bullet* pBullet = m_playerBulletManager.GetBullet(j);
+		if (pBullet)
+		{
+			for (int i = 0; i < m_enemyManager.GetEnemyCount(); i++)
+			{
+				// 敵が有効なら
+				Enemy* pEnemy = m_enemyManager.GetEnemy(i);
+				if (pEnemy)
+				{
+					// 衝突していたら
+					if (IsHit(pBullet->GetCollider(), pEnemy->GetCollider()))
+					{
+						// 衝突時の関数を呼び出す
+						pBullet->OnHit();
+						pEnemy->OnHit();
+					}
+				}
+			}
+		}
+	}
+
+	// 敵の弾とプレイヤーの衝突判定
+	if (m_player.IsActive())
+	{
+		for (int i = 0; i < m_enemyBulletManager.GetBulletCount(); i++)
+		{
+			// 敵の弾が有効なら
+			Bullet* pBullet = m_enemyBulletManager.GetBullet(i);
+			if (pBullet)
+			{
+				// 衝突していたら
+				if (IsHit(m_player.GetCollider(), pBullet->GetCollider()))
+				{
+					// 衝突時の関数を呼び出す
+					m_player.OnHit();
+					pBullet->OnHit();
+				}
+			}
+		}
+	}
+
 }
 
 // 描画処理
@@ -90,4 +136,16 @@ void Game::Render()
 // 終了処理
 void Game::Finalize()
 {
+}
+
+// AABBの衝突判定関数
+bool Game::IsHit(RECT a, RECT b)
+{
+	if ( (a.left < b.right && b.left < a.right)
+	  && (a.top < b.bottom && b.top < a.bottom)
+	   )
+	{
+		return true;
+	}
+	return false;
 }

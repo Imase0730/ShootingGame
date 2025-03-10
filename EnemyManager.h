@@ -49,5 +49,11 @@ public:
 	// “G‚ğoŒ»‚³‚¹‚éŠÖ”
 	void AppearEnemy(POINT position);
 
+	// ŠÇ—‚Å‚«‚é“G‚Ì”‚ğæ“¾‚·‚éŠÖ”
+	int GetEnemyCount() { return m_enemyCount; }
+
+	// “G‚ğæ“¾‚·‚éŠÖ”
+	Enemy* GetEnemy(int idx);
+
 };
 
