@@ -28,8 +28,8 @@ void Game::Initialize()
 	// シューティングゲームで使用するテクスチャの読み込み
 	m_texture = LoadGraph(L"Resources/Textures/ShootingGame.png");
 
-	// プレイヤーの初期化
-	POINT position{ 200, 200 };
+	// プレイヤーの初期化（X座標は画面の中央へ）
+	POINT position = { (Screen::WIDTH - Player::SIZE) / 2, PLAYER_POSITION_Y };
 	m_player.Initialize(m_texture, position);
 }
 

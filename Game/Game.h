@@ -19,8 +19,8 @@ public:
 	// ゲームタイトル
 	static constexpr const wchar_t* TITLE = L"Sample Game";
 
-	// プレイヤーの大きさ
-	static constexpr int PLAYER_SIZE = 100;
+	// プレイヤーのY座標
+	static constexpr int PLAYER_POSITION_Y = 600;
 
 	// データメンバの宣言 -----------------------------------------------
 private:

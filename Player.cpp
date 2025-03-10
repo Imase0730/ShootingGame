@@ -4,6 +4,7 @@
 //--------------------------------------------------------------------------------------
 #include "pch.h"
 #include "Player.h"
+#include "Game/Screen.h"
 
 // コンストラクタ
 Player::Player()
@@ -45,6 +46,16 @@ void Player::Update(int keyCondition, int keyTrigger)
 	// 位置に速度を足す
 	m_position.x += m_velocity.x;
 	m_position.y += m_velocity.y;
+
+	// プレイヤーが画面外へ出ないように位置を調整
+	if (m_position.x < 0)
+	{
+		m_position.x = 0;
+	}
+	if (m_position.x > Screen::WIDTH - Player::SIZE)
+	{
+		m_position.x = Screen::WIDTH - Player::SIZE;
+	}
 }
 
 // 描画関数
