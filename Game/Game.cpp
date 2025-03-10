@@ -10,9 +10,8 @@ Game::Game()
 	: m_frameTimer{}
 	, m_key{}
 	, m_oldKey{}
-	, m_playerTexture{}
 	, m_texture{}
-	, m_playerPosition { 200, 200 }
+	, m_player{}
 {
 	// 乱数の初期値を設定
 	SRand(static_cast<int>(time(NULL)));
@@ -26,11 +25,12 @@ Game::~Game()
 // 初期化処理
 void Game::Initialize()
 {
-	// プレイヤーのテクスチャの読み込み
-	m_playerTexture = LoadGraph(L"Resources/Textures/Fighter.png");
-
 	// シューティングゲームで使用するテクスチャの読み込み
 	m_texture = LoadGraph(L"Resources/Textures/ShootingGame.png");
+
+	// プレイヤーの初期化
+	POINT position{ 200, 200 };
+	m_player.Initialize(m_texture, position);
 }
 
 // 更新処理
@@ -43,27 +43,15 @@ void Game::Update()
 	m_oldKey = m_key;
 	m_key = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
-	// 左右キーでプレイヤーを左右に移動する
-	if (m_key & PAD_INPUT_LEFT)
-	{
-		m_playerPosition.x -= 10;
-	}
-	if (m_key & PAD_INPUT_RIGHT)
-	{
-		m_playerPosition.x += 10;
-	}
+	// プレイヤーの更新
+	m_player.Update(m_key, m_oldKey);
 }
 
 // 描画処理
 void Game::Render()
 {
-	// １枚絵のプレイヤーを描画
-	DrawGraph(100, 100, m_playerTexture, TRUE);
-
-	// 指定矩形を切り出して指定した矩形へプレイヤーを描画
-	DrawRectExtendGraph( m_playerPosition.x, m_playerPosition.y
-					   , m_playerPosition.x + PLAYER_SIZE, m_playerPosition.y + PLAYER_SIZE
-					   , 0, 0, 32, 32, m_texture, TRUE );
+	// プレイヤーの描画
+	m_player.Render();
 
 	// FPSの描画
 	DrawFormatString(10, 10, GetColor(255, 255, 255), L"%3.0ffps", m_frameTimer.GetFrameRate());

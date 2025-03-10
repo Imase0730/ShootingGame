@@ -143,6 +143,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClInclude Include="pch.h" />
+    <ClCompile Include="Player.cpp" />
     <!-- メイン -->
     <ClCompile Include="WinMain.cpp" />
     <!-- ゲーム -->
@@ -156,6 +157,7 @@
     <ClInclude Include="Library\MemoryLeakDetector.h" />
     <!-- 埋め込みリソース -->
     <ClInclude Include="EmbeddedResources\Resource.h" />
+    <ClInclude Include="Player.h" />
     <ResourceCompile Include="EmbeddedResources\Resource.rc" />
     <Image Include="EmbeddedResources\Icon\Game.ico" />
     <None Include="packages.config" />

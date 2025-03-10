@@ -4,6 +4,7 @@
 //--------------------------------------------------------------------------------------
 #pragma once
 
+#include "Player.h"
 
 // ゲーム
 class Game
@@ -32,11 +33,10 @@ private:
 	int m_oldKey;
 
 	// テクスチャハンドル
-	int m_playerTexture;
 	int m_texture;
 
-	// プレイヤーの位置
-	POINT m_playerPosition;
+	// プレイヤー
+	Player m_player;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:
