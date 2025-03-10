@@ -12,8 +12,8 @@ Game::Game()
 	, m_oldKey{}
 	, m_texture{}
 	, m_player{}
+	, m_enemyManager{}
 	, m_playerBulletManager{}
-	, m_enemy{}
 {
 	// 乱数の初期値を設定
 	SRand(static_cast<int>(time(NULL)));
@@ -34,11 +34,11 @@ void Game::Initialize()
 	POINT position = { (Screen::WIDTH - Player::SIZE) / 2, PLAYER_POSITION_Y };
 	m_player.Initialize(m_texture, position);
 
+	// 敵のマネージャーの初期化
+	m_enemyManager.Initialize(ENEMY_MAX, m_texture);
+
 	// プレイヤーの弾のマネージャーの初期化
 	m_playerBulletManager.Initialize(PLAYER_BULLET_MAX, m_texture);
-
-	// 敵の初期化
-	m_enemy.Initialize(m_texture);
 }
 
 // 更新処理
@@ -54,18 +54,11 @@ void Game::Update()
 	// プレイヤーの更新
 	m_player.Update(m_key, ~m_oldKey & m_key, &m_playerBulletManager);
 
-	// プレイヤーの弾のマネージャーの更新
-	m_playerBulletManager.Update();
-
 	// 敵の更新
-	m_enemy.Update();
+	m_enemyManager.Update();
 
-	// 敵の出現
-	if ((~m_oldKey & m_key) & PAD_INPUT_UP)
-	{
-		POINT position{ 300, 0 };
-		m_enemy.Appear(position);
-	}
+	// プレイヤーの弾の更新
+	m_playerBulletManager.Update();
 }
 
 // 描画処理
@@ -78,7 +71,7 @@ void Game::Render()
 	m_playerBulletManager.Render();
 
 	// 敵の描画
-	m_enemy.Render();
+	m_enemyManager.Render();
 
 	// FPSの描画
 	DrawFormatString(10, 10, GetColor(255, 255, 255), L"%3.0ffps", m_frameTimer.GetFrameRate());

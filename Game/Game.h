@@ -6,8 +6,7 @@
 
 #include "Player.h"
 #include "BulletManager.h"
-
-#include "Enemy.h"
+#include "EnemyManager.h"
 
 // ゲーム
 class Game
@@ -24,6 +23,9 @@ public:
 
 	// プレイヤーのY座標
 	static constexpr int PLAYER_POSITION_Y = 600;
+
+	// 敵の最大数
+	static constexpr int ENEMY_MAX = 10;
 
 	// プレイヤーの弾の最大数
 	static constexpr int PLAYER_BULLET_MAX = 3;
@@ -44,11 +46,11 @@ private:
 	// プレイヤー
 	Player m_player;
 
+	// 敵のマネージャー
+	EnemyManager m_enemyManager;
+
 	// プレイヤーの弾のマネージャー
 	BulletManager m_playerBulletManager;
-
-	// 敵
-	Enemy m_enemy;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:

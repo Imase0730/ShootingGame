@@ -87,6 +87,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -102,6 +105,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
