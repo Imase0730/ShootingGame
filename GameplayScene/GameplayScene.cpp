@@ -56,50 +56,10 @@ void GameplayScene::Update(int keyCondition, int keyTrigger)
 	m_enemyBulletManager.Update();
 
 	// プレイヤーの弾と敵の衝突判定
-	for (int j = 0; j < m_playerBulletManager.GetBulletCount(); j++)
-	{
-		// プレイヤーの弾が有効なら
-		Bullet* pBullet = m_playerBulletManager.GetBullet(j);
-		if (pBullet)
-		{
-			for (int i = 0; i < m_enemyManager.GetEnemyCount(); i++)
-			{
-				// 敵が有効なら
-				Enemy* pEnemy = m_enemyManager.GetEnemy(i);
-				if (pEnemy)
-				{
-					// 衝突していたら
-					if (IsHit(pBullet->GetCollider(), pEnemy->GetCollider()))
-					{
-						// 衝突時の関数を呼び出す
-						pBullet->OnHit();
-						pEnemy->OnHit();
-					}
-				}
-			}
-		}
-	}
-
+	HitCheck_PlayerBulletToEnemy();
+	
 	// 敵の弾とプレイヤーの衝突判定
-	if (m_player.IsActive())
-	{
-		for (int i = 0; i < m_enemyBulletManager.GetBulletCount(); i++)
-		{
-			// 敵の弾が有効なら
-			Bullet* pBullet = m_enemyBulletManager.GetBullet(i);
-			if (pBullet)
-			{
-				// 衝突していたら
-				if (IsHit(m_player.GetCollider(), pBullet->GetCollider()))
-				{
-					// 衝突時の関数を呼び出す
-					m_player.OnHit();
-					pBullet->OnHit();
-					m_pGame->RequestSceneChange(Game::SceneID::TITLE);
-				}
-			}
-		}
-	}
+	HitCheck_EnemyBulletToPlayer();
 }
 
 // 描画処理
@@ -137,4 +97,58 @@ bool GameplayScene::IsHit(RECT a, RECT b)
 		return true;
 	}
 	return false;
+}
+
+// プレイヤーの弾と敵の衝突判定
+void GameplayScene::HitCheck_PlayerBulletToEnemy()
+{
+	// プレイヤーの弾と敵の衝突判定
+	for (int j = 0; j < m_playerBulletManager.GetBulletCount(); j++)
+	{
+		// プレイヤーの弾が有効なら
+		Bullet* pBullet = m_playerBulletManager.GetBullet(j);
+		if (pBullet)
+		{
+			for (int i = 0; i < m_enemyManager.GetEnemyCount(); i++)
+			{
+				// 敵が有効なら
+				Enemy* pEnemy = m_enemyManager.GetEnemy(i);
+				if (pEnemy)
+				{
+					// 衝突していたら
+					if (IsHit(pBullet->GetCollider(), pEnemy->GetCollider()))
+					{
+						// 衝突時の関数を呼び出す
+						pBullet->OnHit();
+						pEnemy->OnHit();
+					}
+				}
+			}
+		}
+	}
+}
+
+// 敵の弾とプレイヤーの衝突判定
+void GameplayScene::HitCheck_EnemyBulletToPlayer()
+{
+	// 敵の弾とプレイヤーの衝突判定
+	if (m_player.IsActive())
+	{
+		for (int i = 0; i < m_enemyBulletManager.GetBulletCount(); i++)
+		{
+			// 敵の弾が有効なら
+			Bullet* pBullet = m_enemyBulletManager.GetBullet(i);
+			if (pBullet)
+			{
+				// 衝突していたら
+				if (IsHit(m_player.GetCollider(), pBullet->GetCollider()))
+				{
+					// 衝突時の関数を呼び出す
+					m_player.OnHit();
+					pBullet->OnHit();
+					m_pGame->RequestSceneChange(Game::SceneID::TITLE);
+				}
+			}
+		}
+	}
 }

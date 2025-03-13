@@ -79,4 +79,10 @@ private:
 	// AABBの衝突判定関数
 	bool IsHit(RECT a, RECT b);
 
+	// プレイヤーの弾と敵の衝突判定
+	void HitCheck_PlayerBulletToEnemy();
+
+	// 敵の弾とプレイヤーの衝突判定
+	void HitCheck_EnemyBulletToPlayer();
+
 };
